@@ -35,14 +35,14 @@
             storeButton = new Button();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
-            addressTextBox = new TextBox();
+            paymentMethodLabel = new Label();
             holderNameTextBox = new TextBox();
-            expiryDateTextBox = new TextBox();
+            pruchaseButton = new Button();
             cvvTextBox = new TextBox();
+            addressTextBox = new TextBox();
+            expiryDateTextBox = new TextBox();
             cardNumberTextBox = new TextBox();
             paymentMethodComboBox = new ComboBox();
-            pruchaseButton = new Button();
-            paymentMethodLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -106,6 +106,7 @@
             storeButton.TabIndex = 61;
             storeButton.Text = "Store";
             storeButton.UseVisualStyleBackColor = false;
+            storeButton.Click += storeButton_Click;
             // 
             // pictureBox1
             // 
@@ -128,13 +129,17 @@
             panel3.Size = new Size(900, 520);
             panel3.TabIndex = 60;
             // 
-            // addressTextBox
+            // paymentMethodLabel
             // 
-            addressTextBox.Location = new Point(378, 371);
-            addressTextBox.Name = "addressTextBox";
-            addressTextBox.PlaceholderText = "Address";
-            addressTextBox.Size = new Size(271, 31);
-            addressTextBox.TabIndex = 73;
+            paymentMethodLabel.AutoSize = true;
+            paymentMethodLabel.BackColor = Color.Transparent;
+            paymentMethodLabel.Font = new Font("Poppins", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            paymentMethodLabel.ForeColor = Color.White;
+            paymentMethodLabel.Location = new Point(307, 34);
+            paymentMethodLabel.Name = "paymentMethodLabel";
+            paymentMethodLabel.Size = new Size(284, 50);
+            paymentMethodLabel.TabIndex = 66;
+            paymentMethodLabel.Text = "PAYMENT METHOD";
             // 
             // holderNameTextBox
             // 
@@ -144,13 +149,15 @@
             holderNameTextBox.Size = new Size(271, 31);
             holderNameTextBox.TabIndex = 72;
             // 
-            // expiryDateTextBox
+            // pruchaseButton
             // 
-            expiryDateTextBox.Location = new Point(378, 292);
-            expiryDateTextBox.Name = "expiryDateTextBox";
-            expiryDateTextBox.PlaceholderText = "Expiry Date";
-            expiryDateTextBox.Size = new Size(271, 31);
-            expiryDateTextBox.TabIndex = 71;
+            pruchaseButton.Location = new Point(208, 450);
+            pruchaseButton.Name = "pruchaseButton";
+            pruchaseButton.Size = new Size(482, 34);
+            pruchaseButton.TabIndex = 67;
+            pruchaseButton.Text = "PURCHASE";
+            pruchaseButton.UseVisualStyleBackColor = true;
+            pruchaseButton.Click += pruchaseButton_Click;
             // 
             // cvvTextBox
             // 
@@ -160,6 +167,22 @@
             cvvTextBox.Size = new Size(271, 31);
             cvvTextBox.TabIndex = 70;
             cvvTextBox.TextChanged += cvvTextBox_TextChanged;
+            // 
+            // addressTextBox
+            // 
+            addressTextBox.Location = new Point(378, 371);
+            addressTextBox.Name = "addressTextBox";
+            addressTextBox.PlaceholderText = "Address";
+            addressTextBox.Size = new Size(271, 31);
+            addressTextBox.TabIndex = 73;
+            // 
+            // expiryDateTextBox
+            // 
+            expiryDateTextBox.Location = new Point(378, 292);
+            expiryDateTextBox.Name = "expiryDateTextBox";
+            expiryDateTextBox.PlaceholderText = "Expiry Date";
+            expiryDateTextBox.Size = new Size(271, 31);
+            expiryDateTextBox.TabIndex = 71;
             // 
             // cardNumberTextBox
             // 
@@ -177,27 +200,7 @@
             paymentMethodComboBox.Size = new Size(271, 33);
             paymentMethodComboBox.TabIndex = 68;
             paymentMethodComboBox.Text = "Payment Method";
-            // 
-            // pruchaseButton
-            // 
-            pruchaseButton.Location = new Point(208, 450);
-            pruchaseButton.Name = "pruchaseButton";
-            pruchaseButton.Size = new Size(482, 34);
-            pruchaseButton.TabIndex = 67;
-            pruchaseButton.Text = "PURCHASE";
-            pruchaseButton.UseVisualStyleBackColor = true;
-            // 
-            // paymentMethodLabel
-            // 
-            paymentMethodLabel.AutoSize = true;
-            paymentMethodLabel.BackColor = Color.Transparent;
-            paymentMethodLabel.Font = new Font("Poppins", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            paymentMethodLabel.ForeColor = Color.White;
-            paymentMethodLabel.Location = new Point(307, 34);
-            paymentMethodLabel.Name = "paymentMethodLabel";
-            paymentMethodLabel.Size = new Size(284, 50);
-            paymentMethodLabel.TabIndex = 66;
-            paymentMethodLabel.Text = "PAYMENT METHOD";
+            paymentMethodComboBox.SelectedIndexChanged += paymentMethodComboBox_SelectedIndexChanged;
             // 
             // paymentMethodForm
             // 

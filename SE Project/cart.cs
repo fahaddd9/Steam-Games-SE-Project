@@ -21,6 +21,8 @@ namespace SE_Project
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GameStoreDB"].ConnectionString;
         private int loggedInUserId; // Add a field for the logged-in user ID
 
+        List<int> gameIds;
+
         public cart(int gameId, int userId)
         {
             InitializeComponent();
@@ -169,7 +171,7 @@ namespace SE_Project
                 {
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    List<int> gameIds = new List<int>();
+                    gameIds = new List<int>();
 
                     while (reader.Read())
                     {
@@ -405,7 +407,7 @@ namespace SE_Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-            paymentForm paymentForm = new paymentForm();
+            paymentForm paymentForm = new paymentForm(gameIds,loggedInUserId);
             paymentForm.Show();
             this.Hide();
         }

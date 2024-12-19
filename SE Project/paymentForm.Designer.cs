@@ -35,11 +35,11 @@
             storeButton = new Button();
             logoImageBox = new PictureBox();
             panel3 = new Panel();
+            totalPriceLabel = new Label();
             gameListPanel = new FlowLayoutPanel();
             totalLabel = new Label();
             continueToPaymentButton = new Button();
             paymentLabel = new Label();
-            totalPriceLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)logoImageBox).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -131,11 +131,25 @@
             panel3.Size = new Size(900, 520);
             panel3.TabIndex = 51;
             // 
+            // totalPriceLabel
+            // 
+            totalPriceLabel.AutoSize = true;
+            totalPriceLabel.BackColor = Color.Transparent;
+            totalPriceLabel.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            totalPriceLabel.ForeColor = Color.White;
+            totalPriceLabel.Location = new Point(725, 368);
+            totalPriceLabel.Name = "totalPriceLabel";
+            totalPriceLabel.Size = new Size(106, 42);
+            totalPriceLabel.TabIndex = 63;
+            totalPriceLabel.Text = "$00.00";
+            totalPriceLabel.Click += totalPriceLabel_Click;
+            // 
             // gameListPanel
             // 
+            gameListPanel.AutoScroll = true;
             gameListPanel.Location = new Point(76, 97);
             gameListPanel.Name = "gameListPanel";
-            gameListPanel.Size = new Size(755, 218);
+            gameListPanel.Size = new Size(810, 262);
             gameListPanel.TabIndex = 62;
             // 
             // totalLabel
@@ -158,6 +172,7 @@
             continueToPaymentButton.TabIndex = 60;
             continueToPaymentButton.Text = "Continue to Payment";
             continueToPaymentButton.UseVisualStyleBackColor = true;
+            continueToPaymentButton.Click += continueToPaymentButton_Click;
             // 
             // paymentLabel
             // 
@@ -170,18 +185,6 @@
             paymentLabel.Size = new Size(158, 50);
             paymentLabel.TabIndex = 57;
             paymentLabel.Text = "PAYMENT";
-            // 
-            // totalPriceLabel
-            // 
-            totalPriceLabel.AutoSize = true;
-            totalPriceLabel.BackColor = Color.Transparent;
-            totalPriceLabel.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            totalPriceLabel.ForeColor = Color.White;
-            totalPriceLabel.Location = new Point(725, 368);
-            totalPriceLabel.Name = "totalPriceLabel";
-            totalPriceLabel.Size = new Size(106, 42);
-            totalPriceLabel.TabIndex = 63;
-            totalPriceLabel.Text = "$00.00";
             // 
             // paymentForm
             // 

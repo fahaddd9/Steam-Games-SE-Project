@@ -35,7 +35,7 @@
             storeButton = new Button();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
-            textBox1 = new TextBox();
+            aboutTextBox = new TextBox();
             pictureBox2 = new PictureBox();
             downloadPlayButton = new Button();
             nameLabel = new Label();
@@ -122,7 +122,7 @@
             // panel3
             // 
             panel3.BackColor = Color.MidnightBlue;
-            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(aboutTextBox);
             panel3.Controls.Add(pictureBox2);
             panel3.Controls.Add(downloadPlayButton);
             panel3.Controls.Add(nameLabel);
@@ -131,14 +131,14 @@
             panel3.Size = new Size(900, 520);
             panel3.TabIndex = 44;
             // 
-            // textBox1
+            // aboutTextBox
             // 
-            textBox1.Location = new Point(86, 318);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "About";
-            textBox1.Size = new Size(726, 91);
-            textBox1.TabIndex = 52;
+            aboutTextBox.Location = new Point(86, 318);
+            aboutTextBox.Multiline = true;
+            aboutTextBox.Name = "aboutTextBox";
+            aboutTextBox.PlaceholderText = "About";
+            aboutTextBox.Size = new Size(726, 91);
+            aboutTextBox.TabIndex = 52;
             // 
             // pictureBox2
             // 
@@ -148,6 +148,7 @@
             pictureBox2.Size = new Size(726, 176);
             pictureBox2.TabIndex = 50;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // downloadPlayButton
             // 
@@ -157,6 +158,7 @@
             downloadPlayButton.TabIndex = 48;
             downloadPlayButton.Text = "Download/Play";
             downloadPlayButton.UseVisualStyleBackColor = true;
+            downloadPlayButton.Click += downloadPlayButton_Click;
             // 
             // nameLabel
             // 
@@ -168,6 +170,7 @@
             nameLabel.Size = new Size(109, 50);
             nameLabel.TabIndex = 34;
             nameLabel.Text = "Name";
+            nameLabel.Click += nameLabel_Click;
             // 
             // Game
             // 
@@ -202,6 +205,6 @@
         private PictureBox pictureBox2;
         private Button downloadPlayButton;
         private Label nameLabel;
-        private TextBox textBox1;
+        private TextBox aboutTextBox;
     }
 }

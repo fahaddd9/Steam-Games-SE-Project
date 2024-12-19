@@ -14,13 +14,75 @@ namespace SE_Project
         private int currentPage = 0;
         private const int itemsPerPage = 4;
 
+        // Variables to store the cheapest game details
+        private int cheapestGameId;
+        private string cheapestGameName;
+        private byte[] cheapestGameImage;
+        private string cheapestGamePrice;
+        private string cheapestGameDescription;
+
         public Store()
         {
             InitializeComponent();
             LoadGames();
+            LoadCheapestGame(); // Load the cheapest game when the form is initialized
             searchButton.Click += SearchButton_Click; // Add Click event handler for searchButton
             nextButton.Click += NextButton_Click; // Add Click event handler for nextButton
             previousButton.Click += PreviousButton_Click; // Add Click event handler for previousButton
+        }
+
+        private void LoadCheapestGame()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT TOP 1 Id, Name, Image, NewPrice, Description FROM Games ORDER BY NewPrice ASC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Store the cheapest game details
+                                cheapestGameId = (int)reader["Id"];
+                                cheapestGameName = reader["Name"].ToString();
+                                cheapestGameImage = (byte[])reader["Image"];
+                                cheapestGamePrice = reader["NewPrice"].ToString();
+                                cheapestGameDescription = reader["Description"].ToString();
+
+                                PictureBox pictureBox = new PictureBox
+                                {
+                                    Dock = DockStyle.Fill,
+                                    SizeMode = PictureBoxSizeMode.StretchImage,
+                                    Image = Image.FromStream(new System.IO.MemoryStream(cheapestGameImage))
+                                };
+
+                                bestGamesPanel.Controls.Clear();
+                                bestGamesPanel.Controls.Add(pictureBox);
+
+                                // Add click event handler to bestGamesPanel
+                                bestGamesPanel.Click += BestGamesPanel_Click;
+                                pictureBox.Click += BestGamesPanel_Click;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BestGamesPanel_Click(object sender, EventArgs e)
+        {
+            // Pass the cheapest game details to the Item form
+            Item item = new Item(cheapestGameId, cheapestGameName, cheapestGameImage, cheapestGamePrice, cheapestGameDescription);
+            item.Show();
+            this.Hide();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -212,7 +274,8 @@ namespace SE_Project
 
         private void LibraryButton_Click_1(object sender, EventArgs e)
         {
-            library lib = new library();
+            int userId = int.Parse(LoginForm.LoggedInUser.UserId);
+            library lib = new library(userId);
             lib.Show();
             this.Hide();
         }

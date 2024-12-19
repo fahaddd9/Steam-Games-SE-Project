@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SE_Project
@@ -15,6 +9,15 @@ namespace SE_Project
         public Game()
         {
             InitializeComponent();
+        }
+
+        public Game(string name, Image image, string description)
+        {
+            InitializeComponent();
+            nameLabel.Text = name;
+            pictureBox2.Image = image;
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            aboutTextBox.Text = description;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -57,6 +60,21 @@ namespace SE_Project
             accountform accountform = new accountform();
             accountform.Show();
             this.Hide();
+        }
+
+        private void nameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void downloadPlayButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Downloading game...");
         }
     }
 }
