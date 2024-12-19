@@ -42,9 +42,11 @@
             gamePictureBox = new PictureBox();
             addToCartButton = new Button();
             nameLabel = new Label();
+            addToWishlistButton = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gamePictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)addToWishlistButton).BeginInit();
             SuspendLayout();
             // 
             // accountButton
@@ -125,6 +127,7 @@
             // panel3
             // 
             panel3.BackColor = Color.MidnightBlue;
+            panel3.Controls.Add(addToWishlistButton);
             panel3.Controls.Add(buyNowButton);
             panel3.Controls.Add(reviewsTextBox);
             panel3.Controls.Add(priceLabel);
@@ -210,6 +213,16 @@
             nameLabel.Text = "Name";
             nameLabel.Click += nameLabel_Click;
             // 
+            // addToWishlistButton
+            // 
+            addToWishlistButton.BackColor = Color.White;
+            addToWishlistButton.Location = new Point(835, 16);
+            addToWishlistButton.Name = "addToWishlistButton";
+            addToWishlistButton.Size = new Size(43, 39);
+            addToWishlistButton.TabIndex = 64;
+            addToWishlistButton.TabStop = false;
+            addToWishlistButton.Click += addToWishlistButton_Click;
+            // 
             // Item
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -228,6 +241,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gamePictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)addToWishlistButton).EndInit();
             ResumeLayout(false);
         }
 
@@ -247,5 +261,6 @@
         private PictureBox gamePictureBox;
         private Button addToCartButton;
         private Label nameLabel;
+        private PictureBox addToWishlistButton;
     }
 }

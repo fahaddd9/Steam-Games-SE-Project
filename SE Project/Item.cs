@@ -1,4 +1,5 @@
-﻿using SE_Project.classes;
+﻿using Microsoft.Data.SqlClient;
+using SE_Project.classes;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -35,6 +36,10 @@ namespace SE_Project
             gamePictureBox.Image = Image.FromStream(new System.IO.MemoryStream(image));
             aboutTextBox.Text = description;
             reviewsTextBox.Text = string.Empty; // Leave reviewsTextBox empty for now
+
+            // Load wishlist image
+            addToWishlistButton.Image = Image.FromFile(@"C:\Users\thefa\Downloads\wishlist.jpeg");
+            addToWishlistButton.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void LoadGameDetails()
@@ -135,6 +140,41 @@ namespace SE_Project
         private void aboutTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void addToWishlistButton_Click(object sender, EventArgs e)
+        {
+            if (LoginForm.LoggedInUser != null)
+            {
+                userId = int.Parse(LoginForm.LoggedInUser.UserId);
+
+                // Add the game to the wishlist in the database
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GameStoreDB"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO Wishlist (UserID, GameID) VALUES (@UserID, @GameID)";
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@UserID", userId);
+                            cmd.Parameters.AddWithValue("@GameID", gameId);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Game added to your wishlist!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("Failed to add game to wishlist: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must be logged in to add items to your wishlist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

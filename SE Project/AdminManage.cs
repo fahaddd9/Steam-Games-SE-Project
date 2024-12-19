@@ -15,7 +15,24 @@ namespace SE_Project
         public AdminManage()
         {
             InitializeComponent();
+            // Load the logout image asynchronously
+            string imagePath = @"C:\Users\thefa\Downloads\logout.jpg";
+            if (System.IO.File.Exists(imagePath))
+            {
+                Task.Run(() =>
+                {
+                    using (var img = Image.FromFile(imagePath))
+                    {
+                        Invoke(new Action(() =>
+                        {
+                            logoutButton.Image = new Bitmap(img);
+                            logoutButton.SizeMode = PictureBoxSizeMode.StretchImage;
+                        }));
+                    }
+                });
+            }
         }
+
 
         private void logoPicBox_Click(object sender, EventArgs e)
         {
@@ -91,6 +108,14 @@ namespace SE_Project
         {
             DeleteUsers deleteUsers = new DeleteUsers();
             deleteUsers.Show();
+            this.Hide();
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            // Navigate to the login form
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
             this.Hide();
         }
     }

@@ -53,9 +53,11 @@
             emailLabel = new Label();
             passwordLabel = new Label();
             userPic = new PictureBox();
+            logoutButton = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)userPic).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)logoutButton).BeginInit();
             SuspendLayout();
             // 
             // accountButton
@@ -136,6 +138,7 @@
             // panel3
             // 
             panel3.BackColor = Color.MidnightBlue;
+            panel3.Controls.Add(logoutButton);
             panel3.Controls.Add(confirmButton);
             panel3.Controls.Add(editCountryBox);
             panel3.Controls.Add(editPhoneNoBox);
@@ -344,6 +347,16 @@
             userPic.TabStop = false;
             userPic.Click += userPic_Click_1;
             // 
+            // logoutButton
+            // 
+            logoutButton.BackColor = Color.White;
+            logoutButton.Location = new Point(30, 462);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(43, 39);
+            logoutButton.TabIndex = 63;
+            logoutButton.TabStop = false;
+            logoutButton.Click += logoutButton_Click;
+            // 
             // accountform
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -363,6 +376,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)userPic).EndInit();
+            ((System.ComponentModel.ISupportInitialize)logoutButton).EndInit();
             ResumeLayout(false);
         }
 
@@ -393,5 +407,6 @@
         private TextBox editEmailBox;
         private TextBox editNameBox;
         private Button confirmButton;
+        private PictureBox logoutButton;
     }
 }

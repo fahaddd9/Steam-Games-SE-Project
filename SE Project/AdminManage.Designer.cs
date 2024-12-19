@@ -35,6 +35,7 @@
             storeButton = new Button();
             logoPicBox = new PictureBox();
             panel3 = new Panel();
+            logoutButton = new PictureBox();
             viewUsersButton = new Button();
             applyRemoveSaleButton = new Button();
             removeGameButton = new Button();
@@ -43,6 +44,7 @@
             manageLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)logoPicBox).BeginInit();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)logoutButton).BeginInit();
             SuspendLayout();
             // 
             // accountButton
@@ -123,6 +125,7 @@
             // panel3
             // 
             panel3.BackColor = Color.MidnightBlue;
+            panel3.Controls.Add(logoutButton);
             panel3.Controls.Add(viewUsersButton);
             panel3.Controls.Add(applyRemoveSaleButton);
             panel3.Controls.Add(removeGameButton);
@@ -133,6 +136,16 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(900, 520);
             panel3.TabIndex = 58;
+            // 
+            // logoutButton
+            // 
+            logoutButton.BackColor = Color.White;
+            logoutButton.Location = new Point(818, 458);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(43, 39);
+            logoutButton.TabIndex = 60;
+            logoutButton.TabStop = false;
+            logoutButton.Click += logoutButton_Click;
             // 
             // viewUsersButton
             // 
@@ -218,6 +231,7 @@
             ((System.ComponentModel.ISupportInitialize)logoPicBox).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)logoutButton).EndInit();
             ResumeLayout(false);
         }
 
@@ -236,5 +250,6 @@
         private Button addItemButton;
         private Button deleteUsersButton;
         private Label manageLabel;
+        private PictureBox logoutButton;
     }
 }

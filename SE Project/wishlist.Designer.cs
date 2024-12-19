@@ -35,18 +35,10 @@
             storeButton = new Button();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
-            panel4 = new Panel();
-            addToCartButton = new Button();
-            removeButton = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            pictureBox2 = new PictureBox();
+            gameListPanel = new FlowLayoutPanel();
             wishlistLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // accountButton
@@ -127,86 +119,21 @@
             // panel3
             // 
             panel3.BackColor = Color.MidnightBlue;
-            panel3.Controls.Add(panel4);
+            panel3.Controls.Add(gameListPanel);
             panel3.Controls.Add(wishlistLabel);
             panel3.Location = new Point(281, 17);
             panel3.Name = "panel3";
             panel3.Size = new Size(900, 520);
             panel3.TabIndex = 44;
             // 
-            // panel4
+            // gameListPanel
             // 
-            panel4.BackColor = Color.CornflowerBlue;
-            panel4.Controls.Add(addToCartButton);
-            panel4.Controls.Add(removeButton);
-            panel4.Controls.Add(label1);
-            panel4.Controls.Add(label2);
-            panel4.Controls.Add(label3);
-            panel4.Controls.Add(pictureBox2);
-            panel4.Location = new Point(76, 78);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(742, 178);
-            panel4.TabIndex = 35;
-            // 
-            // addToCartButton
-            // 
-            addToCartButton.Location = new Point(543, 124);
-            addToCartButton.Name = "addToCartButton";
-            addToCartButton.Size = new Size(152, 34);
-            addToCartButton.TabIndex = 46;
-            addToCartButton.Text = "Add to Cart";
-            addToCartButton.UseVisualStyleBackColor = true;
-            // 
-            // removeButton
-            // 
-            removeButton.Location = new Point(149, 124);
-            removeButton.Name = "removeButton";
-            removeButton.Size = new Size(112, 34);
-            removeButton.TabIndex = 45;
-            removeButton.Text = "Remove";
-            removeButton.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(646, 21);
-            label1.Name = "label1";
-            label1.Size = new Size(49, 25);
-            label1.TabIndex = 44;
-            label1.Text = "Price";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(149, 58);
-            label2.Name = "label2";
-            label2.Size = new Size(80, 25);
-            label2.TabIndex = 43;
-            label2.Text = "Platform";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(149, 21);
-            label3.Name = "label3";
-            label3.Size = new Size(59, 25);
-            label3.TabIndex = 42;
-            label3.Text = "Name";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = Color.White;
-            pictureBox2.Location = new Point(22, 21);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(112, 137);
-            pictureBox2.TabIndex = 41;
-            pictureBox2.TabStop = false;
+            gameListPanel.AutoScroll = true;
+            gameListPanel.Location = new Point(76, 78);
+            gameListPanel.Name = "gameListPanel";
+            gameListPanel.Size = new Size(777, 410);
+            gameListPanel.TabIndex = 36;
+            gameListPanel.Paint += gameListPanel_Paint;
             // 
             // wishlistLabel
             // 
@@ -236,9 +163,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -251,13 +175,7 @@
         private Button storeButton;
         private PictureBox pictureBox1;
         private Panel panel3;
-        private Panel panel4;
-        private Button addToCartButton;
-        private Button removeButton;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private PictureBox pictureBox2;
         private Label wishlistLabel;
+        private FlowLayoutPanel gameListPanel;
     }
 }

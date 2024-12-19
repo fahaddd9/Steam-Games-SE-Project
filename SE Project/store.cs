@@ -52,7 +52,6 @@ namespace SE_Project
             }
         }
 
-
         private void NextButton_Click(object sender, EventArgs e)
         {
             currentPage++;
@@ -183,12 +182,22 @@ namespace SE_Project
             this.Hide();
         }
 
-
         private void WishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wish = new wishlist();
-            wish.Show();
-            this.Hide();
+            // Retrieve the user ID from the LoggedInUser in LoginForm
+            if (LoginForm.LoggedInUser != null)
+            {
+                int userId = int.Parse(LoginForm.LoggedInUser.UserId);
+                //MessageBox.Show(userId.ToString());
+                // Pass the userId to the wishlist form
+                wishlist wish = new wishlist(userId);
+                wish.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("User is not logged in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void FeaturingLabel_Click(object sender, EventArgs e)
@@ -216,7 +225,7 @@ namespace SE_Project
                 int userId = int.Parse(LoginForm.LoggedInUser.UserId);
 
                 // Pass the gameId and userId to the Cart form
-                cart cart = new cart( userId);
+                cart cart = new cart(userId);
                 cart.Show();
                 this.Hide();
             }

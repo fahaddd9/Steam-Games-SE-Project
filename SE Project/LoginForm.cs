@@ -10,8 +10,12 @@ namespace SE_Project
 {
     public partial class LoginForm : Form
     {
-        public static UserModel LoggedInUser { get; private set; } // Static property to hold the logged-in user
+        public static UserModel LoggedInUser { get; private set; }
 
+        public static void Logout()
+        {
+            LoggedInUser = null;
+        }
         public LoginForm()
         {
             InitializeComponent();

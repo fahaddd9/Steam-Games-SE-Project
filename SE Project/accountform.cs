@@ -10,6 +10,8 @@ namespace SE_Project
 {
     public partial class accountform : Form
     {
+
+
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GameStoreDB"].ConnectionString;
 
         public accountform()
@@ -17,6 +19,7 @@ namespace SE_Project
             InitializeComponent();
             LoadUserData(); // Call the method to load user data when the form initializes
             SetEditControlsVisibility(false); // Initially hide the edit controls
+            LoadLogoutImage(); // Load the logout image
         }
 
         private void SetEditControlsVisibility(bool isVisible)
@@ -65,6 +68,18 @@ namespace SE_Project
             }
         }
 
+        private void LoadLogoutImage()
+        {
+            string imagePath = @"C:\Users\thefa\Downloads\logout.jpg";
+            if (System.IO.File.Exists(imagePath))
+            {
+                using (var image = Image.FromFile(imagePath))
+                {
+                    logoutButton.Image = new Bitmap(image);
+                    logoutButton.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            }
+        }
 
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -164,8 +179,6 @@ namespace SE_Project
             }
         }
 
-
-
         private void editButton_Click(object sender, EventArgs e)
         {
             SetEditControlsVisibility(true);
@@ -249,5 +262,16 @@ namespace SE_Project
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            // Perform logout actions
+            LoginForm.Logout();
+            MessageBox.Show("You have been logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+        }
+
     }
 }

@@ -29,7 +29,7 @@ namespace SE_Project
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Username FROM Users"; // Replace 'Users' with your table name
+                    string query = "SELECT Username, ProfileImage FROM Users"; // Include the ProfileImage column
                     if (!string.IsNullOrEmpty(searchQuery))
                     {
                         query += " WHERE Username LIKE @searchQuery";
@@ -48,6 +48,7 @@ namespace SE_Project
                     {
                         // Step 2: Extract data from the database
                         string username = reader["Username"].ToString().Trim(); // Trim any leading/trailing spaces
+                        byte[] imageBytes = reader["ProfileImage"] as byte[]; // Fetch the image data
 
                         // Step 3: Create a dynamic panel for each user
                         Panel userPanel = new Panel
@@ -67,6 +68,16 @@ namespace SE_Project
                             SizeMode = PictureBoxSizeMode.StretchImage,
                             BackColor = Color.White // Display a white empty box
                         };
+
+                        // Convert byte array to Image and set it to PictureBox
+                        if (imageBytes != null && imageBytes.Length > 0)
+                        {
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                userImageBox.Image = Image.FromStream(ms);
+                            }
+                        }
+
                         userPanel.Controls.Add(userImageBox);
 
                         // Step 5: Add Label for username
@@ -105,6 +116,8 @@ namespace SE_Project
                 MessageBox.Show($"Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void searchButton_Click(object sender, EventArgs e)
         {
