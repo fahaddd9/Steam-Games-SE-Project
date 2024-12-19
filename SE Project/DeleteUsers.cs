@@ -1,0 +1,224 @@
+﻿using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SE_Project
+{
+    public partial class DeleteUsers : Form
+    {
+        string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GameStoreDB"].ConnectionString;
+
+        public DeleteUsers()
+        {
+            InitializeComponent();
+            LoadUsers(); // Call the method to load users when the form initializes
+        }
+
+        private void LoadUsers(string searchQuery = "")
+        {
+            try
+            {
+                // Step 1: Connect to DB and fetch user data
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT Username FROM Users"; // Replace 'Users' with your table name
+                    if (!string.IsNullOrEmpty(searchQuery))
+                    {
+                        query += " WHERE Username LIKE @searchQuery";
+                    }
+                    SqlCommand command = new SqlCommand(query, connection);
+                    if (!string.IsNullOrEmpty(searchQuery))
+                    {
+                        command.Parameters.AddWithValue("@searchQuery", "%" + searchQuery + "%");
+                    }
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    // Clear existing controls
+                    userListPanel.Controls.Clear();
+
+                    while (reader.Read())
+                    {
+                        // Step 2: Extract data from the database
+                        string username = reader["Username"].ToString().Trim(); // Trim any leading/trailing spaces
+
+                        // Step 3: Create a dynamic panel for each user
+                        Panel userPanel = new Panel
+                        {
+                            Size = new Size(600, 128), // Decreased width
+                            BackColor = Color.CornflowerBlue,
+                            Margin = new Padding(10),
+                            Anchor = AnchorStyles.None // Center the panel
+                        };
+
+                        // Step 4: Add CheckBox for the user selection
+                        CheckBox userCheckBox = new CheckBox
+                        {
+                            Location = new Point(10, 50),
+                            Size = new Size(20, 20),
+                            Tag = username // Store the username in the Tag property
+                        };
+                        userPanel.Controls.Add(userCheckBox);
+
+                        // Step 5: Add PictureBox for the user image
+                        PictureBox userImageBox = new PictureBox
+                        {
+                            Location = new Point(40, 21),
+                            Size = new Size(84, 84),
+                            BorderStyle = BorderStyle.FixedSingle,
+                            SizeMode = PictureBoxSizeMode.StretchImage,
+                            BackColor = Color.White // Display a white empty box
+                        };
+                        userPanel.Controls.Add(userImageBox);
+
+                        // Step 6: Add Label for username
+                        Label usernameLabel = new Label
+                        {
+                            Text = username,
+                            Location = new Point(140, 38),
+                            MaximumSize = new Size(300, 0), // Wrap text within 300px width
+                            AutoSize = true, // Automatically adjust height
+                            Font = new Font("Arial", 12, FontStyle.Bold),
+                            ForeColor = Color.Black
+                        };
+
+                        userPanel.Controls.Add(usernameLabel);
+
+                        // Step 7: Add the panel to the FlowLayoutPanel
+                        userListPanel.Controls.Add(userPanel);
+                    }
+                    reader.Close();
+                }
+
+                // Center the user panels within the userListPanel
+                foreach (Control control in userListPanel.Controls)
+                {
+                    if (control is Panel userPanel)
+                    {
+                        userPanel.Location = new Point(
+                            (userListPanel.ClientSize.Width - userPanel.Width) / 2,
+                            userPanel.Location.Y
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            LoadUsers(searchBox.Text);
+        }
+
+        private void logoPicBox_Click(object sender, EventArgs e)
+        {
+            Store store = new Store();
+            store.Show();
+            this.Hide();
+        }
+
+        private void storeButton_Click(object sender, EventArgs e)
+        {
+            Store store = new Store();
+            store.Show();
+            this.Hide();
+        }
+
+        private void LibraryButton_Click(object sender, EventArgs e)
+        {
+            library library = new library();
+            library.Show();
+            this.Hide();
+        }
+
+        private void cartButton_Click(object sender, EventArgs e)
+        {
+            cart cart = new cart();
+            cart.Show();
+            this.Hide();
+        }
+
+        private void wishlistButton_Click(object sender, EventArgs e)
+        {
+            wishlist wishlist = new wishlist();
+            wishlist.Show();
+            this.Hide();
+        }
+
+        private void accountButton_Click(object sender, EventArgs e)
+        {
+            AdminManage adminManage = new AdminManage();
+            adminManage.Show();
+            this.Hide();
+        }
+
+        private void userListPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void searchBox_TextChanged(object sender, EventArgs e)
+        {
+            LoadUsers(searchBox.Text);
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            List<string> usersToDelete = new List<string>();
+
+            // Collect usernames of checked users
+            foreach (Control control in userListPanel.Controls)
+            {
+                if (control is Panel userPanel)
+                {
+                    foreach (Control panelControl in userPanel.Controls)
+                    {
+                        if (panelControl is CheckBox checkBox && checkBox.Checked)
+                        {
+                            usersToDelete.Add(checkBox.Tag.ToString());
+                        }
+                    }
+                }
+            }
+
+            if (usersToDelete.Count > 0)
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        foreach (string username in usersToDelete)
+                        {
+                            string deleteQuery = "DELETE FROM Users WHERE Username = @username";
+                            SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
+                            deleteCommand.Parameters.AddWithValue("@username", username);
+                            deleteCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Reload the user list after deletion
+                    LoadUsers();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No users selected for deletion.", "Delete Users", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+    }
+}
