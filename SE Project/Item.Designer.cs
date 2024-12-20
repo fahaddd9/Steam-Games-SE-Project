@@ -35,18 +35,17 @@
             storeButton = new Button();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
+            addToWishlistButton = new PictureBox();
             buyNowButton = new Button();
-            reviewsTextBox = new TextBox();
             priceLabel = new Label();
             aboutTextBox = new TextBox();
             gamePictureBox = new PictureBox();
             addToCartButton = new Button();
             nameLabel = new Label();
-            addToWishlistButton = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gamePictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addToWishlistButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gamePictureBox).BeginInit();
             SuspendLayout();
             // 
             // accountButton
@@ -129,7 +128,6 @@
             panel3.BackColor = Color.MidnightBlue;
             panel3.Controls.Add(addToWishlistButton);
             panel3.Controls.Add(buyNowButton);
-            panel3.Controls.Add(reviewsTextBox);
             panel3.Controls.Add(priceLabel);
             panel3.Controls.Add(aboutTextBox);
             panel3.Controls.Add(gamePictureBox);
@@ -140,6 +138,16 @@
             panel3.Size = new Size(900, 520);
             panel3.TabIndex = 51;
             // 
+            // addToWishlistButton
+            // 
+            addToWishlistButton.BackColor = Color.White;
+            addToWishlistButton.Location = new Point(835, 16);
+            addToWishlistButton.Name = "addToWishlistButton";
+            addToWishlistButton.Size = new Size(43, 39);
+            addToWishlistButton.TabIndex = 64;
+            addToWishlistButton.TabStop = false;
+            addToWishlistButton.Click += addToWishlistButton_Click;
+            // 
             // buyNowButton
             // 
             buyNowButton.Location = new Point(473, 453);
@@ -149,15 +157,6 @@
             buyNowButton.Text = "Buy Now";
             buyNowButton.UseVisualStyleBackColor = true;
             buyNowButton.Click += button1_Click;
-            // 
-            // reviewsTextBox
-            // 
-            reviewsTextBox.Location = new Point(86, 360);
-            reviewsTextBox.Multiline = true;
-            reviewsTextBox.Name = "reviewsTextBox";
-            reviewsTextBox.PlaceholderText = "Reviews";
-            reviewsTextBox.Size = new Size(726, 70);
-            reviewsTextBox.TabIndex = 54;
             // 
             // priceLabel
             // 
@@ -173,7 +172,7 @@
             // 
             // aboutTextBox
             // 
-            aboutTextBox.Location = new Point(86, 275);
+            aboutTextBox.Location = new Point(86, 350);
             aboutTextBox.Multiline = true;
             aboutTextBox.Name = "aboutTextBox";
             aboutTextBox.PlaceholderText = "About";
@@ -186,7 +185,7 @@
             gamePictureBox.BackColor = Color.White;
             gamePictureBox.Location = new Point(86, 70);
             gamePictureBox.Name = "gamePictureBox";
-            gamePictureBox.Size = new Size(726, 176);
+            gamePictureBox.Size = new Size(726, 254);
             gamePictureBox.TabIndex = 50;
             gamePictureBox.TabStop = false;
             gamePictureBox.Click += gamePictureBox_Click;
@@ -213,16 +212,6 @@
             nameLabel.Text = "Name";
             nameLabel.Click += nameLabel_Click;
             // 
-            // addToWishlistButton
-            // 
-            addToWishlistButton.BackColor = Color.White;
-            addToWishlistButton.Location = new Point(835, 16);
-            addToWishlistButton.Name = "addToWishlistButton";
-            addToWishlistButton.Size = new Size(43, 39);
-            addToWishlistButton.TabIndex = 64;
-            addToWishlistButton.TabStop = false;
-            addToWishlistButton.Click += addToWishlistButton_Click;
-            // 
             // Item
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -240,8 +229,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gamePictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)addToWishlistButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gamePictureBox).EndInit();
             ResumeLayout(false);
         }
 
@@ -255,7 +244,6 @@
         private PictureBox pictureBox1;
         private Panel panel3;
         private Button buyNowButton;
-        private TextBox reviewsTextBox;
         private Label priceLabel;
         private TextBox aboutTextBox;
         private PictureBox gamePictureBox;

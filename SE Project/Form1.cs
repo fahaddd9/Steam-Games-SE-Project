@@ -1,4 +1,5 @@
 using System;
+using System.Drawing; // Add this namespace for Image
 using System.Security.Cryptography; // For hashing
 using System.Text; // For string manipulation
 using System.Windows.Forms; // For form controls
@@ -18,6 +19,18 @@ namespace SE_Project
             // Optional: Add initialization logic here if needed
             phoneNoTextBox.PasswordChar = '\0'; // Ensure phone number is not masked
             countryTextBox.PasswordChar = '\0'; // Ensure country is not masked
+
+            // Load the image into logoPicBox
+            string imagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(imagePath))
+            {
+                logoPicBox.Image = Image.FromFile(imagePath);
+                logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void signUpButton_Click(object sender, EventArgs e)
@@ -75,7 +88,6 @@ namespace SE_Project
                 }
             }
         }
-
 
         private void ClearForm()
         {

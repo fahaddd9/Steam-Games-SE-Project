@@ -18,10 +18,26 @@ namespace SE_Project
         string price;
         string description;
         byte[] imageData;
+
         public RemoveGame()
         {
             InitializeComponent();
+            LoadLogoImage(); // Load the logo image
             LoadGames(); // Call the method to load games when the form initializes
+        }
+
+        private void LoadLogoImage()
+        {
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoPicBox.Image = Image.FromFile(logoImagePath);
+                logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadGames(string searchTerm = "")
@@ -137,9 +153,6 @@ namespace SE_Project
             }
         }
 
-
-
-
         private Image ByteArrayToImage(byte[] byteArrayIn)
         {
             using (var ms = new System.IO.MemoryStream(byteArrayIn))
@@ -201,7 +214,6 @@ namespace SE_Project
             LoadGames(searchTerm);
         }
 
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -250,7 +262,6 @@ namespace SE_Project
             gameListPanel.Controls.Clear();
             LoadGames(); // Reload games after removal
         }
-
 
         private void RemoveGameFromDatabase(string gameName)
         {

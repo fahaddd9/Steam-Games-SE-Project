@@ -15,6 +15,9 @@ namespace SE_Project
         public AdminManage()
         {
             InitializeComponent();
+            // Load the logo image
+            LoadLogoImage();
+
             // Load the logout image asynchronously
             string imagePath = @"C:\Users\thefa\Downloads\logout.jpg";
             if (System.IO.File.Exists(imagePath))
@@ -33,6 +36,19 @@ namespace SE_Project
             }
         }
 
+        private void LoadLogoImage()
+        {
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoPicBox.Image = Image.FromFile(logoImagePath);
+                logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void logoPicBox_Click(object sender, EventArgs e)
         {

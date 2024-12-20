@@ -100,9 +100,9 @@
             // logoPicBox
             // 
             logoPicBox.BackColor = Color.White;
-            logoPicBox.Location = new Point(235, 235);
+            logoPicBox.Location = new Point(235, 214);
             logoPicBox.Name = "logoPicBox";
-            logoPicBox.Size = new Size(150, 75);
+            logoPicBox.Size = new Size(150, 116);
             logoPicBox.TabIndex = 1;
             logoPicBox.TabStop = false;
             logoPicBox.Click += logoPicBox_Click;

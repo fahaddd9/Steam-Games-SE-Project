@@ -17,6 +17,16 @@ namespace SE_Project
         public accountform()
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             LoadUserData(); // Call the method to load user data when the form initializes
             SetEditControlsVisibility(false); // Initially hide the edit controls
             LoadLogoutImage(); // Load the logout image

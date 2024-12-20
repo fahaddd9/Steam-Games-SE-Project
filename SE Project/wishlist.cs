@@ -14,6 +14,16 @@ namespace SE_Project
         public wishlist(int userId)
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             currentUserId = userId;
             LoadWishlist(userId);
         }
@@ -21,6 +31,16 @@ namespace SE_Project
         public wishlist()
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadWishlist(int userId)

@@ -24,6 +24,16 @@ namespace SE_Project
         public Store()
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             LoadGames();
             LoadCheapestGame(); // Load the cheapest game when the form is initialized
             searchButton.Click += SearchButton_Click; // Add Click event handler for searchButton

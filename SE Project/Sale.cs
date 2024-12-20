@@ -17,6 +17,16 @@ namespace SE_Project
         public Sale()
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoPicBox.Image = Image.FromFile(logoImagePath);
+                logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             LoadGames(); // Call the method to load games when the form initializes
         }
 

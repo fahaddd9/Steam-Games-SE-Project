@@ -15,11 +15,31 @@ namespace SE_Project
         public Item()
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public Item(int gameId)
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.gameId = gameId;
             LoadGameDetails();
         }
@@ -27,6 +47,16 @@ namespace SE_Project
         public Item(int gameId, string name, byte[] image, string price, string description)
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.gameId = gameId;
 
             // Set the game details
@@ -35,7 +65,7 @@ namespace SE_Project
             gamePictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set SizeMode to StretchImage
             gamePictureBox.Image = Image.FromStream(new System.IO.MemoryStream(image));
             aboutTextBox.Text = description;
-            reviewsTextBox.Text = string.Empty; // Leave reviewsTextBox empty for now
+            //reviewsTextBox.Text = string.Empty; // Leave reviewsTextBox empty for now
 
             // Load wishlist image
             addToWishlistButton.Image = Image.FromFile(@"C:\Users\thefa\Downloads\wishlist.jpeg");

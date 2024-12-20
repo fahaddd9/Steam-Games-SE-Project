@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing; // Add this namespace for Image
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -24,6 +25,18 @@ namespace SE_Project
         private void LoginForm_Load(object sender, EventArgs e)
         {
             passwordTextBox.PasswordChar = '*'; // Ensure password is masked
+
+            // Load the image into pictureBox1
+            string imagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(imagePath))
+            {
+                pictureBox1.Image = Image.FromFile(imagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -86,7 +99,6 @@ namespace SE_Project
                 }
             }
         }
-
 
         private string HashPassword(string password)
         {

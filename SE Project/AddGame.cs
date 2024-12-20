@@ -14,6 +14,23 @@ namespace SE_Project
         {
             InitializeComponent();
             GameImageBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set the SizeMode property
+
+            // Load the logo image
+            LoadLogoImage();
+        }
+
+        private void LoadLogoImage()
+        {
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoPicBox.Image = Image.FromFile(logoImagePath);
+                logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void logoPicBox_Click(object sender, EventArgs e)

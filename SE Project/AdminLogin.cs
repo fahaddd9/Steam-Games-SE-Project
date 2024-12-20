@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing; // Add this namespace for Image
 using System.Text;
 using System.Windows.Forms;
 using System.Security.Cryptography; // For hashing
@@ -19,11 +20,24 @@ namespace SE_Project
         public AdminLogin()
         {
             InitializeComponent();
+            // Load the image into logoPicBox
+            string imagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(imagePath))
+            {
+                logoPicBox.Image = Image.FromFile(imagePath);
+                logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void AdminLogin_Load(object sender, EventArgs e)
         {
             passwordTextBox.PasswordChar = '*'; // Ensure password is masked
+
+            
         }
 
         private void loginButton_Click(object sender, EventArgs e)

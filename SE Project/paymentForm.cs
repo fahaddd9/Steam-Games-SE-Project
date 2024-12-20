@@ -28,6 +28,16 @@ namespace SE_Project
         public paymentForm(List<int> gameIds, int userId)
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoImageBox.Image = Image.FromFile(logoImagePath);
+                logoImageBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.gameIds = gameIds;
             this.userId = userId;
 
@@ -39,6 +49,16 @@ namespace SE_Project
         public paymentForm()
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoImageBox.Image = Image.FromFile(logoImagePath);
+                logoImageBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             CreateGamePanel();
             UpdateTotalPrice();
         }
@@ -47,6 +67,16 @@ namespace SE_Project
         public paymentForm(Image gameImage, string gameName, string gamePrice)
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                logoImageBox.Image = Image.FromFile(logoImagePath);
+                logoImageBox.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             CreateGamePanel();
 
             // Set the image, name, and price to the respective controls
