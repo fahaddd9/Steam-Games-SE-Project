@@ -261,14 +261,14 @@ namespace SE_Project
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart(userID=0);
+            cart cart = new cart(userID);
             cart.Show();
             this.Hide();
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wishlist = new wishlist(userID=0);
+            wishlist wishlist = new wishlist(userID);
             wishlist.Show();
             this.Hide();
         }
@@ -292,7 +292,7 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library lib = new library(userID=0);
+            library lib = new library(userID);
             lib.Show();
             this.Hide();
         }

@@ -443,19 +443,17 @@ namespace SE_Project
         {
             if (loggedInUserId == 0)
             {
-                cart cart = new cart();
-                cart.Show();
+                wishlist wishlist = new wishlist();
+                wishlist.Show();
                 this.Hide();
             }
             else
             {
-                cart cart = new cart(loggedInUserId);
-                cart.Show();
+                wishlist wishlist = new wishlist(loggedInUserId);
+                wishlist.Show();
                 this.Hide();
             }
-            wishlist wishlist = new wishlist(loggedInUserId);
-            wishlist.Show();
-            this.Hide();
+           
         }
 
         private void accountButton_Click(object sender, EventArgs e)
