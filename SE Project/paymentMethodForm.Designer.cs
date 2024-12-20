@@ -70,6 +70,7 @@
             wishlistButton.TabIndex = 64;
             wishlistButton.Text = "Wishlist";
             wishlistButton.UseVisualStyleBackColor = false;
+            wishlistButton.Click += wishlistButton_Click;
             // 
             // cartButton
             // 
@@ -82,6 +83,7 @@
             cartButton.TabIndex = 63;
             cartButton.Text = "Cart";
             cartButton.UseVisualStyleBackColor = false;
+            cartButton.Click += cartButton_Click;
             // 
             // LibraryButton
             // 
@@ -94,6 +96,7 @@
             LibraryButton.TabIndex = 62;
             LibraryButton.Text = "Library";
             LibraryButton.UseVisualStyleBackColor = false;
+            LibraryButton.Click += LibraryButton_Click;
             // 
             // storeButton
             // 

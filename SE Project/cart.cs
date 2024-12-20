@@ -283,7 +283,7 @@ namespace SE_Project
             PictureBox gameImageBox = new PictureBox
             {
                 Name = "gameImageBox",
-                Size = new Size(112, 137), // Adjust size as needed
+                Size = new Size(250, 137), // Adjust size as needed
                 Location = new Point(22, 21), // Adjust location as needed
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = gameImage
@@ -293,7 +293,7 @@ namespace SE_Project
             Label nameLabel = new Label
             {
                 Name = "nameLabel",
-                Location = new Point(149, 21),
+                Location = new Point(275, 21),
                 Size = new Size(300, 50), // Increased size
                 AutoSize = false,         // Optional: set to true if dynamic resizing is desired
                 ForeColor = Color.White,
@@ -409,30 +409,70 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library lib = new library();
-            lib.Show();
-            this.Hide();
+            if (loggedInUserId == 0) {
+                library lib = new library();
+                lib.Show();
+                this.Hide();
+            }
+            else {
+                library lib = new library(loggedInUserId);
+                lib.Show();
+                this.Hide();
+            }
+           
         }
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
-            cart.Show();
-            this.Hide();
+            if (loggedInUserId == 0)
+            {
+                cart cart = new cart();
+                cart.Show();
+                this.Hide();
+            }
+            else
+            {
+                cart cart = new cart(loggedInUserId);
+                cart.Show();
+                this.Hide();
+            }
+            
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wishlist = new wishlist();
+            if (loggedInUserId == 0)
+            {
+                cart cart = new cart();
+                cart.Show();
+                this.Hide();
+            }
+            else
+            {
+                cart cart = new cart(loggedInUserId);
+                cart.Show();
+                this.Hide();
+            }
+            wishlist wishlist = new wishlist(loggedInUserId);
             wishlist.Show();
             this.Hide();
         }
 
         private void accountButton_Click(object sender, EventArgs e)
         {
-            accountform accountform = new accountform();
-            accountform.Show();
-            this.Hide();
+            if (loggedInUserId == 0)
+            {
+                AdminManage adminManage = new AdminManage();
+                adminManage.Show();
+                this.Hide();
+            }
+            else
+            {
+                accountform accountform = new accountform();
+                accountform.Show();
+                this.Hide();
+            }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)

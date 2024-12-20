@@ -149,6 +149,8 @@ namespace SE_Project
             {
                 Size = new Size(112, 34),
                 Location = new Point(232, 70),
+                ForeColor= Color.White,
+                BackColor = Color.Navy,
                 Text = "Remove"
             };
             removeButton.Click += (sender, e) => RemoveGameFromWishlist(gameId);
@@ -159,6 +161,8 @@ namespace SE_Project
             {
                 Size = new Size(152, 34),
                 Location = new Point(543, 70),
+                ForeColor = Color.White,
+                BackColor = Color.Navy,
                 Text = "Add to Cart"
             };
             addToCartButton.Click += (sender, e) => AddGameToCart(gameId);
@@ -239,30 +243,69 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library lib = new library();
-            lib.Show();
-            this.Hide();
+            if (currentUserId == 0)
+            {
+                library lib = new library();
+                lib.Show();
+                this.Hide();
+            }
+            else
+            {
+                library lib = new library(currentUserId);
+                lib.Show();
+                this.Hide();
+            }
+            
         }
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
-            cart.Show();
-            this.Hide();
+            if (currentUserId == 0)
+            {
+                cart cart = new cart();
+                cart.Show();
+                this.Hide();
+            }
+            else
+            {
+                cart cart = new cart(currentUserId);
+                cart.Show();
+                this.Hide();
+            }
+            
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wish = new wishlist();
-            wish.Show();
-            this.Hide();
+            if (currentUserId == 0)
+            {
+                wishlist wish = new wishlist();
+                wish.Show();
+                this.Hide();
+            }
+            else {
+                wishlist wish = new wishlist(currentUserId);
+                wish.Show();
+                this.Hide();
+            }
+            
         }
 
         private void accountButton_Click(object sender, EventArgs e)
         {
-            accountform accountform = new accountform();
-            accountform.Show();
-            this.Hide();
+            if (currentUserId == 0)
+            {
+                AdminManage adminManage = new AdminManage();
+                adminManage.Show();
+                this.Hide();
+            }
+            else
+            {
+                accountform accountform = new accountform();
+                accountform.Show();
+                this.Hide();
+            }
+
         }
 
         private void gameListPanel_Paint(object sender, PaintEventArgs e)

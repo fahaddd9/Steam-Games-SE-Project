@@ -90,7 +90,9 @@ namespace SE_Project
         private void BestGamesPanel_Click(object sender, EventArgs e)
         {
             // Pass the cheapest game details to the Item form
+            int userId = int.Parse(LoginForm.LoggedInUser.UserId);
             Item item = new Item(cheapestGameId, cheapestGameName, cheapestGameImage, cheapestGamePrice, cheapestGameDescription);
+            item.setUserId(userId);
             item.Show();
             this.Hide();
         }
@@ -226,7 +228,8 @@ namespace SE_Project
                                 // Add click event to gamePanel and its child controls
                                 EventHandler clickHandler = (s, e) =>
                                 {
-                                    ShowGameDetails(gameId, name, image, newPrice, description);
+                                    int userId = int.Parse(LoginForm.LoggedInUser.UserId); // Retrieve the user ID
+                                    ShowGameDetails(userId, gameId, name, image, newPrice, description);
                                 };
 
                                 gamePanel.Click += clickHandler;
@@ -246,13 +249,16 @@ namespace SE_Project
             }
         }
 
-        private void ShowGameDetails(int gameId, string name, byte[] image, string price, string description)
+
+        private void ShowGameDetails(int userId, int gameId, string name, byte[] image, string price, string description)
         {
             // Implement the logic to show game details
             Item item = new Item(gameId, name, image, price, description);
+            item.setUserId(userId);
             item.Show();
             this.Hide();
         }
+
 
         private void WishlistButton_Click(object sender, EventArgs e)
         {
@@ -268,7 +274,10 @@ namespace SE_Project
             }
             else
             {
-                MessageBox.Show("User is not logged in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                wishlist wishlist = new wishlist();
+                wishlist.Show();
+                this.Hide();
+                //MessageBox.Show("User is not logged in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -284,10 +293,23 @@ namespace SE_Project
 
         private void LibraryButton_Click_1(object sender, EventArgs e)
         {
-            int userId = int.Parse(LoginForm.LoggedInUser.UserId);
-            library lib = new library(userId);
-            lib.Show();
-            this.Hide();
+            if (LoginForm.LoggedInUser == null)
+            {
+                library libi = new library();
+                libi.Show();
+                this.Hide();
+            }
+
+            
+            else
+            {
+                int userId = int.Parse(LoginForm.LoggedInUser.UserId);
+                library lib = new library(userId);
+                lib.Show();
+                this.Hide();
+            }
+
+           
         }
 
         private void cartButton_Click(object sender, EventArgs e)
@@ -304,16 +326,33 @@ namespace SE_Project
             }
             else
             {
-                MessageBox.Show("User is not logged in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cart carti = new cart();
+                carti.Show();
+                this.Hide();
+                //MessageBox.Show("User is not logged in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void accountButton_Click(object sender, EventArgs e)
         {
-            accountform account = new accountform();
-            account.Show();
-            this.Hide();
+            if (LoginForm.LoggedInUser == null)
+            {
+                AdminManage adminManage = new AdminManage();
+                adminManage.Show();
+                this.Hide();
+                //MessageBox.Show("User is not logged in.");
+                //return;
+            }
+
+        
+            else
+            {
+                accountform account = new accountform();
+                account.Show();
+                this.Hide();
+            }
         }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -329,38 +368,7 @@ namespace SE_Project
             this.Hide();
         }
 
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-            Item item = new Item();
-            item.Show();
-            this.Hide();
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            Item item = new Item();
-            item.Show();
-            this.Hide();
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            Item item = new Item();
-            item.Show();
-            this.Hide();
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-            Item item = new Item();
-            item.Show();
-            this.Hide();
-        }
-
-        private void gameListPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {

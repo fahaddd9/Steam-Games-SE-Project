@@ -108,27 +108,36 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library lib = new library();
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            library lib = new library(userID);
             lib.Show();
             this.Hide();
         }
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            cart cart = new cart(userID);
             cart.Show();
             this.Hide();
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wish = new wishlist();
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            wishlist wish = new wishlist(userID);
             wish.Show();
             this.Hide();
         }
 
         private void accountButton_Click(object sender, EventArgs e)
         {
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            if (userID == 0 ) { 
+                AdminManage adminManage = new AdminManage();
+                adminManage.Show();
+                this.Hide();
+            }
             accountform accountform = new accountform();
             accountform.Show();
             this.Hide();

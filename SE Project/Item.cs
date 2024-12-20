@@ -44,6 +44,11 @@ namespace SE_Project
             LoadGameDetails();
         }
 
+        public void setUserId(int userId)
+        {
+            this.userId = userId;
+        }
+
         public Item(int gameId, string name, byte[] image, string price, string description)
         {
             InitializeComponent();
@@ -86,7 +91,7 @@ namespace SE_Project
             string gamePrice = priceLabel.Text;
 
             // Pass the game details to the paymentForm
-            paymentForm paymentForm = new paymentForm(gameImage, gameName, gamePrice);
+            paymentForm paymentForm = new paymentForm(gameImage, gameName, gamePrice,userId);
             paymentForm.Show();
             this.Hide();
         }
@@ -107,21 +112,21 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library library = new library();
+            library library = new library(userId);
             library.Show();
             this.Hide();
         }
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
+            cart cart = new cart(userId);
             cart.Show();
             this.Hide();
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wishlist = new wishlist();
+            wishlist wishlist = new wishlist(userId);
             wishlist.Show();
             this.Hide();
         }

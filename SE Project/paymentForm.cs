@@ -64,7 +64,7 @@ namespace SE_Project
         }
 
         // New constructor that takes image, name, and price
-        public paymentForm(Image gameImage, string gameName, string gamePrice)
+        public paymentForm(Image gameImage, string gameName, string gamePrice,int userId)
         {
             InitializeComponent();
             string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
@@ -83,6 +83,7 @@ namespace SE_Project
             gameImageBox.Image = gameImage;
             gameNameLabel.Text = gameName;
             gamePriceLabel.Text = gamePrice;
+            this.userId = userId;
 
             UpdateTotalPrice();
         }
@@ -281,21 +282,21 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library library = new library();
+            library library = new library(userId);
             library.Show();
             this.Hide();
         }
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
+            cart cart = new cart(userId);
             cart.Show();
             this.Hide();
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wishlist = new wishlist();
+            wishlist wishlist = new wishlist(userId);
             wishlist.Show();
             this.Hide();
         }
@@ -314,6 +315,7 @@ namespace SE_Project
 
         private void continueToPaymentButton_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(userId.ToString());
             paymentMethodForm paymentMethodForm = new paymentMethodForm(userId,gameIds,totalPrice);
             paymentMethodForm.Show();
             this.Hide();

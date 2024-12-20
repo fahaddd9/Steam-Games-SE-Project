@@ -139,6 +139,27 @@ namespace SE_Project
                 }
             }
         }
-    
+
+        private void LibraryButton_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(userId.ToString());
+            library library = new library(userId);
+            library.Show();
+            this.Hide();
+        }
+
+        private void cartButton_Click(object sender, EventArgs e)
+        {
+            cart cart = new cart(userId);
+            cart.Show();
+            this.Hide();
+        }
+
+        private void wishlistButton_Click(object sender, EventArgs e)
+        {
+            wishlist wishlist = new wishlist(userId);
+            wishlist.Show();
+            this.Hide();
+        }
     }
 }

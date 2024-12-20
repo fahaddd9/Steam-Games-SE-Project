@@ -36,21 +36,24 @@ namespace SE_Project
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library library = new library();
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            library library = new library(userID);
             library.Show();
             this.Hide();
         }
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            cart cart = new cart(userID);
             cart.Show();
             this.Hide();
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wishlist = new wishlist();
+            int userID = int.Parse(LoginForm.LoggedInUser.UserId);
+            wishlist wishlist = new wishlist(userID);
             wishlist.Show();
             this.Hide();
         }

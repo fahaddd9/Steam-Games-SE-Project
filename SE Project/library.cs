@@ -10,7 +10,7 @@ namespace SE_Project
     public partial class library : Form
     {
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GameStoreDB"].ConnectionString;
-        int userID;
+        int userID=0;
 
         public library()
         {
@@ -58,7 +58,7 @@ namespace SE_Project
             {
                 Panel gamePanel = new Panel
                 {
-                    Size = new Size(150, 166),
+                    Size = new Size(200, 100),
                     Location = new Point(0, 0),
                     Margin = new Padding(5),
                     Tag = gameId // Store the gameId in the Tag property
@@ -66,7 +66,7 @@ namespace SE_Project
 
                 PictureBox gameImageBox = new PictureBox
                 {
-                    Size = new Size(150, 166),
+                    Size = new Size(230, 120),
                     Location = new Point(0, 0),
                     BorderStyle = BorderStyle.FixedSingle,
                     Tag = gameId // Store the gameId in the Tag property
@@ -261,28 +261,38 @@ namespace SE_Project
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            cart cart = new cart();
+            cart cart = new cart(userID=0);
             cart.Show();
             this.Hide();
         }
 
         private void wishlistButton_Click(object sender, EventArgs e)
         {
-            wishlist wishlist = new wishlist();
+            wishlist wishlist = new wishlist(userID=0);
             wishlist.Show();
             this.Hide();
         }
 
         private void accountButton_Click(object sender, EventArgs e)
         {
-            accountform account = new accountform();
-            account.Show();
-            this.Hide();
+            if (LoginForm.LoggedInUser == null)
+            {
+                AdminManage adminManage = new AdminManage();
+                adminManage.Show();
+                this.Hide();
+            }
+
+            else {
+                accountform account = new accountform();
+                account.Show();
+                this.Hide();
+            }
+            
         }
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {
-            library lib = new library();
+            library lib = new library(userID=0);
             lib.Show();
             this.Hide();
         }
