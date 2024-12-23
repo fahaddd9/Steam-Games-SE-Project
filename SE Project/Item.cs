@@ -90,11 +90,12 @@ namespace SE_Project
             string gameName = nameLabel.Text;
             string gamePrice = priceLabel.Text;
 
-            // Pass the game details to the paymentForm
-            paymentForm paymentForm = new paymentForm(gameImage, gameName, gamePrice,userId);
+            // Pass the game details and gameId to the paymentForm
+            paymentForm paymentForm = new paymentForm(gameImage, gameName, gamePrice, userId, gameId);
             paymentForm.Show();
             this.Hide();
         }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {

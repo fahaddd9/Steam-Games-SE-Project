@@ -270,10 +270,18 @@ namespace SE_Project
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "DELETE FROM Games WHERE Name = @Name"; // Replace 'Games' with your table name
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Name", gameName);
-                    command.ExecuteNonQuery();
+
+                    // Step 1: Delete related records in the Wishlist table
+                    string deleteWishlistQuery = "DELETE FROM Wishlist WHERE GameID = (SELECT ID FROM Games WHERE Name = @Name)";
+                    SqlCommand deleteWishlistCommand = new SqlCommand(deleteWishlistQuery, connection);
+                    deleteWishlistCommand.Parameters.AddWithValue("@Name", gameName);
+                    deleteWishlistCommand.ExecuteNonQuery();
+
+                    // Step 2: Delete the game from the Games table
+                    string deleteGameQuery = "DELETE FROM Games WHERE Name = @Name";
+                    SqlCommand deleteGameCommand = new SqlCommand(deleteGameQuery, connection);
+                    deleteGameCommand.Parameters.AddWithValue("@Name", gameName);
+                    deleteGameCommand.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -281,6 +289,7 @@ namespace SE_Project
                 MessageBox.Show($"Error removing game: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void gameListPanel_Paint(object sender, PaintEventArgs e)
         {

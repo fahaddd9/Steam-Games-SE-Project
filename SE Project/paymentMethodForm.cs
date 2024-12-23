@@ -108,6 +108,12 @@ namespace SE_Project
                 return;
             }
 
+            if (gameIds == null || !gameIds.Any())
+            {
+                MessageBox.Show("No games selected for purchase.");
+                return;
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = "INSERT INTO Payments (UserID, GameIDs, TotalAmount, PaymentMethod, Status) " +
@@ -139,6 +145,7 @@ namespace SE_Project
                 }
             }
         }
+
 
         private void LibraryButton_Click(object sender, EventArgs e)
         {

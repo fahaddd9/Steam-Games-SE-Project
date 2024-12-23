@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,8 +58,8 @@ namespace SE_Project
                     while (reader.Read())
                     {
                         // Step 2: Extract data from the database
-                        string username = reader["Username"].ToString().Trim(); // Trim any leading/trailing spaces
-                        byte[] imageBytes = reader["ProfileImage"] as byte[]; // Fetch the image data
+                        string username = reader["Username"] != DBNull.Value ? reader["Username"].ToString().Trim() : string.Empty; // Trim any leading/trailing spaces
+                        byte[] imageBytes = reader["ProfileImage"] != DBNull.Value ? (byte[])reader["ProfileImage"] : null; // Fetch the image data
 
                         // Step 3: Create a dynamic panel for each user
                         Panel userPanel = new Panel
@@ -136,7 +137,6 @@ namespace SE_Project
             }
         }
 
-
         private void searchButton_Click(object sender, EventArgs e)
         {
             LoadUsers(searchBox.Text);
@@ -205,7 +205,7 @@ namespace SE_Project
                 {
                     foreach (Control panelControl in userPanel.Controls)
                     {
-                        if (panelControl is CheckBox checkBox && checkBox.Checked)
+                        if (panelControl is CheckBox checkBox && checkBox.Checked && checkBox.Tag != null)
                         {
                             usersToDelete.Add(checkBox.Tag.ToString());
                         }
@@ -222,10 +222,29 @@ namespace SE_Project
                         connection.Open();
                         foreach (string username in usersToDelete)
                         {
-                            string deleteQuery = "DELETE FROM Users WHERE Username = @username";
-                            SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
-                            deleteCommand.Parameters.AddWithValue("@username", username);
-                            deleteCommand.ExecuteNonQuery();
+                            // Step 1: Delete related records in the Payments table
+                            string deletePaymentsQuery = "DELETE FROM Payments WHERE UserID = (SELECT UserID FROM Users WHERE Username = @username)";
+                            SqlCommand deletePaymentsCommand = new SqlCommand(deletePaymentsQuery, connection);
+                            deletePaymentsCommand.Parameters.AddWithValue("@username", username);
+                            deletePaymentsCommand.ExecuteNonQuery();
+
+                            // Step 2: Delete related records in the Cart table
+                            string deleteCartQuery = "DELETE FROM Cart WHERE UserID = (SELECT UserID FROM Users WHERE Username = @username)";
+                            SqlCommand deleteCartCommand = new SqlCommand(deleteCartQuery, connection);
+                            deleteCartCommand.Parameters.AddWithValue("@username", username);
+                            deleteCartCommand.ExecuteNonQuery();
+
+                            // Step 3: Delete related records in the Wishlist table
+                            string deleteWishlistQuery = "DELETE FROM Wishlist WHERE UserID = (SELECT UserID FROM Users WHERE Username = @username)";
+                            SqlCommand deleteWishlistCommand = new SqlCommand(deleteWishlistQuery, connection);
+                            deleteWishlistCommand.Parameters.AddWithValue("@username", username);
+                            deleteWishlistCommand.ExecuteNonQuery();
+
+                            // Step 4: Delete the user from the Users table
+                            string deleteUserQuery = "DELETE FROM Users WHERE Username = @username";
+                            SqlCommand deleteUserCommand = new SqlCommand(deleteUserQuery, connection);
+                            deleteUserCommand.Parameters.AddWithValue("@username", username);
+                            deleteUserCommand.ExecuteNonQuery();
                         }
                     }
 

@@ -9,11 +9,22 @@ namespace SE_Project
         public Game()
         {
             InitializeComponent();
+
         }
 
         public Game(string name, Image image, string description)
         {
             InitializeComponent();
+            string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
+            if (System.IO.File.Exists(logoImagePath))
+            {
+                pictureBox1.Image = Image.FromFile(logoImagePath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Optional: Adjust the image size mode
+            }
+            else
+            {
+                MessageBox.Show("Logo image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             nameLabel.Text = name;
             pictureBox2.Image = image;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;

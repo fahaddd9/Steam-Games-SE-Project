@@ -22,7 +22,7 @@ namespace SE_Project
 
         decimal totalPrice;
 
-        private List<int> gameIds;
+        private List<int> gameIds = new List<int>();
         private int userId;
 
         public paymentForm(List<int> gameIds, int userId)
@@ -64,7 +64,7 @@ namespace SE_Project
         }
 
         // New constructor that takes image, name, and price
-        public paymentForm(Image gameImage, string gameName, string gamePrice,int userId)
+        public paymentForm(Image gameImage, string gameName, string gamePrice,int userId, int gameId)
         {
             InitializeComponent();
             string logoImagePath = @"C:\UNIVERSITY\SE\SE PROJECT\images\logo.jpg";
@@ -84,6 +84,7 @@ namespace SE_Project
             gameNameLabel.Text = gameName;
             gamePriceLabel.Text = gamePrice;
             this.userId = userId;
+            gameIds.Add(gameId);
 
             UpdateTotalPrice();
         }
@@ -315,7 +316,7 @@ namespace SE_Project
 
         private void continueToPaymentButton_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(userId.ToString());
+           // MessageBox.Show(gameIds.ToString());
             paymentMethodForm paymentMethodForm = new paymentMethodForm(userId,gameIds,totalPrice);
             paymentMethodForm.Show();
             this.Hide();
